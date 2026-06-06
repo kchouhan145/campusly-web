@@ -1,11 +1,28 @@
 import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Events from './pages/Events';
+import Marketplace from './pages/Marketplace';
+import Profile from './pages/Profile';
+import Lostfound from './pages/Lostfound';
+import Login from './pages/Login';
+import NavBar from './components/NavBar';
+import NotFoundPage from './pages/NotFoundPage';
+
 function App() {
 
   return (
-    <>
-      <h1 className='text-5xl'>Campusly Web Version</h1>
-      <h2>under developement</h2>
-    </>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={[<NavBar/>,<Home/>]} />
+        <Route path='/events' element={[<NavBar/>,<Events/>]}/>
+        <Route path='/market' element={[<NavBar/>,<Marketplace/>]}/>
+        <Route path='/lostfound' element={[<NavBar/>,<Lostfound/>]}/>
+        <Route path='/login' element={[<NavBar/>,<Login/>]}/>
+        <Route path='/profile' element={[<NavBar/>,<Profile/>]}/>
+        <Route path="*" element={<NotFoundPage/>} />
+      </Routes>
+    </div>
   )
 }
 
