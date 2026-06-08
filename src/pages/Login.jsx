@@ -50,7 +50,7 @@ export default function Login() {
     // <div className="min-h-screen bg-[#fff8f4] flex items-center justify-center px-4">
     <div className="min-h-screen flex">
 
-      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-violet-700 via-indigo-700 to-purple-800 text-white items-center justify-center p-12">
+      <div className="hidden lg:flex w-1/2 bg-linear-to-br from-violet-700 via-indigo-700 to-purple-800 text-white items-center justify-center p-12">
         <div className="max-w-md">
           <h1 className="text-6xl font-bold mb-6">
             Campusly
