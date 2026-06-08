@@ -29,7 +29,7 @@ const NavBar = () => {
               </button>
             </Link>
 
-            <Link to="/login">
+            <Link to="/register">
               <button className="px-6 py-2 bg-violet-600 text-white rounded-xl hover:bg-violet-700">
                 Sign Up
               </button>

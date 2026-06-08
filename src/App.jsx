@@ -8,6 +8,7 @@ import Lostfound from './pages/Lostfound';
 import Login from './pages/Login';
 import NavBar from './components/NavBar';
 import NotFoundPage from './pages/NotFoundPage';
+import Singup from './pages/Singup';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route path='/market' element={[<NavBar/>,<Marketplace/>]}/>
         <Route path='/lostfound' element={[<NavBar/>,<Lostfound/>]}/>
         <Route path='/login' element={[<NavBar/>,<Login/>]}/>
+        <Route path='/register' element={[<NavBar/>,<Singup/>]}/>
         <Route path='/profile' element={[<NavBar/>,<Profile/>]}/>
         <Route path="*" element={<NotFoundPage/>} />
       </Routes>
