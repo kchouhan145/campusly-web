@@ -1,9 +1,9 @@
 import React from "react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 const NavBar = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   // const [user, setUser] = useState(null);
 
   // useEffect(() => {
@@ -34,17 +34,19 @@ const NavBar = () => {
           )}
 
           <div className="flex gap-4">
-            <Link to="/login">
-              <button className="px-6 py-2 border rounded-xl hover:bg-gray-100 cursor-pointer">
-                Login
-              </button>
-            </Link>
-
-            <Link to="/register">
-              <button className="px-6 py-2 bg-violet-600 text-white rounded-xl hover:bg-violet-700 cursor-pointer">
-                Sign Up
-              </button>
-            </Link>
+            {!user ? (
+              <><Link to="/login">
+                <button className="px-6 py-2 border rounded-xl hover:bg-gray-100 cursor-pointer">
+                  Login
+                </button>
+              </Link><Link to="/register">
+                  <button className="px-6 py-2 bg-violet-600 text-white rounded-xl hover:bg-violet-700 cursor-pointer">
+                    Sign Up
+                  </button>
+                </Link></>
+            ) : (
+              ""
+            )}
 
             <Link to="/download">
               <button className="px-6 py-2 border rounded-xl hover:bg-gray-100 cursor-pointer">
