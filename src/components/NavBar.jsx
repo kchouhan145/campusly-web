@@ -1,7 +1,14 @@
 import React from "react";
+import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { useAuth } from "../context/AuthContext";
 const NavBar = () => {
+  const {user} = useAuth();
+  // const [user, setUser] = useState(null);
+
+  // useEffect(() => {
+
+  // }, []);
   return (
     <div>
       {/* Navbar */}
@@ -14,13 +21,17 @@ const NavBar = () => {
             <h1 className="text-3xl font-bold text-slate-900">Campusly</h1>
           </div>
 
-          <div className="hidden md:flex gap-10 text-slate-700">
-            <Link to="/">Home</Link>
-            <Link to="/events">Events</Link>
-            <Link to="/market">MarketPlace</Link>
-            <Link to="/lostfound">Lost&Found</Link>
-            <Link to="/profile">Profile</Link>
-          </div>
+          {!user ? (
+            " "
+          ) : (
+            <div className="hidden md:flex gap-10 text-slate-700">
+              <Link to="/">Home</Link>
+              <Link to="/events">Events</Link>
+              <Link to="/market">MarketPlace</Link>
+              <Link to="/lostfound">Lost & Found</Link>
+              <Link to="/profile">Profile</Link>
+            </div>
+          )}
 
           <div className="flex gap-4">
             <Link to="/login">

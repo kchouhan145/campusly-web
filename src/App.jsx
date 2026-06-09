@@ -12,20 +12,23 @@ import Login from './pages/Login';
 import NavBar from './components/NavBar';
 import NotFoundPage from './pages/NotFoundPage';
 import Singup from './pages/Singup';
+import Getapp from './pages/Getapp';
+import Footer from './components/Footer';
 
 function App() {
 
   return (
     <div className="App">
       <Routes>
-        <Route path='/login' element={[<NavBar/>,<Login/>]}/>
-        <Route path='/register' element={[<NavBar/>,<Singup/>]}/>
-        <Route path="*" element={<NotFoundPage/>} />
-        <Route path="/" element={<ProtectedRuoute><NavBar/><Home/></ProtectedRuoute>} />
-        <Route path='/events' element={<ProtectedRuoute><NavBar/><Events/></ProtectedRuoute>}/>
-        <Route path='/market' element={<ProtectedRuoute><NavBar/><Marketplace/></ProtectedRuoute>}/>
-        <Route path='/lostfound' element={<ProtectedRuoute><NavBar/><Lostfound/></ProtectedRuoute>}/>
-        <Route path='/profile' element={<ProtectedRuoute><NavBar/><Profile/></ProtectedRuoute>}/>
+        <Route path='/login' element={[<NavBar/>,<Login/>,<Footer/>]}/>
+        <Route path='/register' element={[<NavBar/>,<Singup/>,<Footer/>]}/>
+        <Route path="*" element={[<NavBar/>,<NotFoundPage/>,<Footer/>]} />
+        <Route path='download' element={[<NavBar/>,<Getapp/>,<Footer/>]}/>
+        <Route path="/" element={<ProtectedRuoute><NavBar/><Home/><Footer/></ProtectedRuoute>} />
+        <Route path='/events' element={<ProtectedRuoute><NavBar/><Events/><Footer/></ProtectedRuoute>}/>
+        <Route path='/market' element={<ProtectedRuoute><NavBar/><Marketplace/><Footer/></ProtectedRuoute>}/>
+        <Route path='/lostfound' element={<ProtectedRuoute><NavBar/><Lostfound/><Footer/></ProtectedRuoute>}/>
+        <Route path='/profile' element={<ProtectedRuoute><NavBar/><Profile/><Footer/></ProtectedRuoute>}/>
       </Routes>
       <ToastContainer
         position="top-right"
