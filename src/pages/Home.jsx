@@ -220,9 +220,9 @@ export default function Home() {
                   })}
               </p>
 
-              <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+              {/* <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
                 {selectedAnnouncement.content}
-              </div>
+              </div> */}
             </div>
           </div>
         )}
