@@ -153,7 +153,7 @@ export default function Getapp() {
           </a>
 
           <p className="mt-4 text-sm text-violet-200">
-            Android 8.0+ • Version 1.2 • Secure & Free
+            Android 8.0+ • Version 2.1 • Secure & Free
           </p>
         </div>
       </section>
