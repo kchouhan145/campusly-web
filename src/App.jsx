@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ProtectedRuoute from './routes/ProtectedRoute';
 import Home from './pages/Home';
 import Events from './pages/Events';
 import Marketplace from './pages/Marketplace';
@@ -15,15 +18,19 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={[<NavBar/>,<Home/>]} />
-        <Route path='/events' element={[<NavBar/>,<Events/>]}/>
-        <Route path='/market' element={[<NavBar/>,<Marketplace/>]}/>
-        <Route path='/lostfound' element={[<NavBar/>,<Lostfound/>]}/>
         <Route path='/login' element={[<NavBar/>,<Login/>]}/>
         <Route path='/register' element={[<NavBar/>,<Singup/>]}/>
-        <Route path='/profile' element={[<NavBar/>,<Profile/>]}/>
         <Route path="*" element={<NotFoundPage/>} />
+        <Route path="/" element={<ProtectedRuoute><NavBar/><Home/></ProtectedRuoute>} />
+        <Route path='/events' element={<ProtectedRuoute><NavBar/><Events/></ProtectedRuoute>}/>
+        <Route path='/market' element={<ProtectedRuoute><NavBar/><Marketplace/></ProtectedRuoute>}/>
+        <Route path='/lostfound' element={<ProtectedRuoute><NavBar/><Lostfound/></ProtectedRuoute>}/>
+        <Route path='/profile' element={<ProtectedRuoute><NavBar/><Profile/></ProtectedRuoute>}/>
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+      />
     </div>
   )
 }
