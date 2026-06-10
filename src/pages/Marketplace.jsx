@@ -46,6 +46,7 @@ export default function Marketplace() {
       toast.success("Product deleted successfully");
 
       fetchProducts();
+      setSelectedProduct(null);
     } catch (error) {
       toast.error(
         error.response?.data?.message ||

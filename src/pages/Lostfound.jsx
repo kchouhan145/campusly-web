@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { toast } from "react-toastify";
+import { useAuth } from "../context/AuthContext";
 
 export default function LostFound() {
+  const {user} = useAuth();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -22,6 +24,28 @@ export default function LostFound() {
   });
 
   const [itemImage, setItemImage] = useState(null);
+
+  const handleDeletePost = async (postId) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+      await api.delete(`/api/posts/${postId}`);
+
+      toast.success("Post deleted successfully");
+
+      fetchLostFoundItems();
+      setSelectedItem();
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ||
+        "Failed to delete product"
+      );
+    }
+  };
 
   const handleCreateLostFound = async () => {
     try {
@@ -74,6 +98,7 @@ export default function LostFound() {
       const { data } = await api.get("/api/posts");
 
       setItems(data.posts);
+      console.log(data.posts);
     } catch (error) {
       console.error(error);
       toast.error("Failed to load items");
@@ -475,6 +500,15 @@ export default function LostFound() {
               >
                 Contact Owner
               </a> */}
+              {String(user?._id || user?.id) ===
+                String(selectedItem?.userId?._id) && (
+                  <button
+                    onClick={() => handleDeletePost(selectedItem._id)}
+                    className="mt-3 w-full bg-red-500 text-white py-2 rounded-xl hover:bg-red-600"
+                  >
+                    Delete Product
+                  </button>
+                )}
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ export default function Events() {
   const [search, setSearch] = useState("");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [loading,setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const [eventForm, setEventForm] = useState({
     title: "",
@@ -22,6 +22,27 @@ export default function Events() {
   });
 
   const [eventImage, setEventImage] = useState(null);
+  const handleDeleteEvent = async (postId) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this event?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+      await api.delete(`/api/events/${postId}`);
+
+      toast.success("Event deleted successfully");
+
+      fetchEvents();
+      setSelectedEvent(null);
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ||
+        "Failed to delete event"
+      );
+    }
+  };
 
   const handleCreateEvent = async () => {
     try {
@@ -72,11 +93,12 @@ export default function Events() {
     try {
       const { data } = await api.get("/api/events");
       setEvents(data.events || data);
+      // console.log(data.events);
     } catch (error) {
       console.error(error);
       toast.error("Failed to fetch events");
-    }    
-    finally{
+    }
+    finally {
       setLoading(false);
     }
   };
@@ -438,6 +460,19 @@ export default function Events() {
                   {selectedEvent.description}
                 </p>
               </div>
+
+              {(
+                String(user?._id || user?.id) ===
+                String(selectedEvent?.createdBy?._id) ||
+                user?.role === "admin"
+              ) && (
+                  <button
+                    onClick={() => handleDeleteEvent(selectedEvent._id)}
+                    className="mt-3 w-full bg-red-500 text-white py-2 rounded-xl hover:bg-red-600"
+                  >
+                    Delete Event
+                  </button>
+                )}
 
               {/* {selectedEvent.organizer && (
                 <div className="mt-6 border-t pt-4">
