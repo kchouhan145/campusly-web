@@ -22,81 +22,203 @@ export default function Profile() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        Loading...
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="animate-pulse text-xl font-semibold text-violet-600">
+          Loading Profile...
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
-      <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-lg p-8">
+    <div className="min-h-screen bg-slate-50">
 
-        <div className="flex flex-col items-center">
+      {/* Hero Section */}
 
-          <div className="w-28 h-28 rounded-full bg-violet-100 flex items-center justify-center text-4xl font-bold text-violet-700">
-            {user.name?.charAt(0).toUpperCase()}
+      <section className="bg-gradient-to-r from-violet-700 via-indigo-700 to-purple-800 text-white">
+        <div className="max-w-6xl mx-auto px-6 py-16">
+
+          <div className="flex flex-col md:flex-row items-center gap-8">
+
+            <div className="w-36 h-36 rounded-full bg-white/20 backdrop-blur-lg border-4 border-white flex items-center justify-center text-5xl font-bold">
+              {user.name?.charAt(0).toUpperCase()}
+            </div>
+
+            <div>
+              <h1 className="text-5xl font-bold">
+                {user.name}
+              </h1>
+
+              <p className="text-violet-100 text-lg mt-2">
+                @{user.username}
+              </p>
+
+              <span className="inline-block mt-4 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-sm font-semibold capitalize">
+                {user.role}
+              </span>
+            </div>
+
           </div>
-
-          <h1 className="mt-4 text-3xl font-bold">
-            {user.name}
-          </h1>
-
-          <p className="text-gray-500">
-            @{user.username}
-          </p>
         </div>
+      </section>
 
-        <div className="grid md:grid-cols-2 gap-6 mt-10">
+      <div className="max-w-6xl mx-auto px-6 -mt-10 pb-12">
 
-          <div className="border rounded-2xl p-5">
-            <h3 className="font-semibold mb-2">
-              Email
-            </h3>
-            <p>{user.email}</p>
-          </div>
+        {/* Stats */}
 
-          <div className="border rounded-2xl p-5">
-            <h3 className="font-semibold mb-2">
+        <div className="grid md:grid-cols-3 gap-6">
+
+          <div className="bg-white rounded-3xl p-6 shadow-lg">
+            <h3 className="text-gray-500 text-sm">
               Department
             </h3>
-            <p>{user.department}</p>
-          </div>
 
-          <div className="border rounded-2xl p-5">
-            <h3 className="font-semibold mb-2">
-              Role
-            </h3>
-            <p className="capitalize">
-              {user.role}
+            <p className="text-2xl font-bold mt-2">
+              {user.department}
             </p>
           </div>
 
-          <div className="border rounded-2xl p-5">
-            <h3 className="font-semibold mb-2">
-              Joined
+          <div className="bg-white rounded-3xl p-6 shadow-lg">
+            <h3 className="text-gray-500 text-sm">
+              Member Since
             </h3>
-            <p>
+
+            <p className="text-2xl font-bold mt-2">
               {new Date(user.createdAt).toLocaleDateString()}
             </p>
           </div>
 
-        </div>
+          <div className="bg-white rounded-3xl p-6 shadow-lg">
+            <h3 className="text-gray-500 text-sm">
+              Account Status
+            </h3>
 
-        <div className="mt-10 flex gap-4">
-
-          <button className="px-6 py-3 bg-violet-600 text-white rounded-xl hover:bg-violet-700" oncl onClick={()=>{toast.warning("Coming Soon.......")}}>
-            Edit Profile
-          </button>
-
-          <button
-            onClick={logout}
-            className="px-6 py-3 bg-red-500 text-white rounded-xl hover:bg-red-600"
-          >
-            Logout
-          </button>
+            <p className="text-green-600 text-2xl font-bold mt-2">
+              Active
+            </p>
+          </div>
 
         </div>
+
+        {/* Profile Information */}
+
+        <div className="grid lg:grid-cols-2 gap-6 mt-8">
+
+          <div className="bg-white rounded-3xl p-8 shadow-lg">
+            <h2 className="text-2xl font-bold mb-6">
+              Personal Information
+            </h2>
+
+            <div className="space-y-5">
+
+              <div>
+                <p className="text-sm text-gray-500">
+                  Full Name
+                </p>
+                <p className="font-semibold text-lg">
+                  {user.name}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-500">
+                  Username
+                </p>
+                <p className="font-semibold text-lg">
+                  @{user.username}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-500">
+                  Email Address
+                </p>
+                <p className="font-semibold text-lg break-all">
+                  {user.email}
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl p-8 shadow-lg">
+            <h2 className="text-2xl font-bold mb-6">
+              Campus Details
+            </h2>
+
+            <div className="space-y-5">
+
+              <div>
+                <p className="text-sm text-gray-500">
+                  Department
+                </p>
+                <p className="font-semibold text-lg">
+                  {user.department}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-500">
+                  Role
+                </p>
+                <p className="font-semibold text-lg capitalize">
+                  {user.role}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-500">
+                  Joined On
+                </p>
+                <p className="font-semibold text-lg">
+                  {new Date(user.createdAt).toLocaleDateString()}
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        {/* Quick Actions */}
+
+        <div className="bg-white rounded-3xl p-8 shadow-lg mt-8">
+
+          <h2 className="text-2xl font-bold mb-6">
+            Account Actions
+          </h2>
+
+          <div className="flex flex-wrap gap-4">
+
+            <button
+              onClick={() =>
+                toast.info("Profile editing coming soon")
+              }
+              className="px-6 py-3 bg-violet-600 text-white rounded-xl font-semibold hover:bg-violet-700 transition"
+            >
+              Edit Profile
+            </button>
+
+            <button
+              onClick={() =>
+                toast.info("Password change coming soon")
+              }
+              className="px-6 py-3 border border-violet-600 text-violet-600 rounded-xl font-semibold hover:bg-violet-50 transition"
+            >
+              Change Password
+            </button>
+
+            <button
+              onClick={logout}
+              className="px-6 py-3 bg-red-500 text-white rounded-xl font-semibold hover:bg-red-600 transition"
+            >
+              Logout
+            </button>
+
+          </div>
+
+        </div>
+
       </div>
     </div>
   );

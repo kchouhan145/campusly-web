@@ -14,6 +14,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import Singup from './pages/Singup';
 import Getapp from './pages/Getapp';
 import Footer from './components/Footer';
+import Chat from './pages/Chat';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path='/events' element={<ProtectedRuoute><NavBar/><Events/><Footer/></ProtectedRuoute>}/>
         <Route path='/market' element={<ProtectedRuoute><NavBar/><Marketplace/><Footer/></ProtectedRuoute>}/>
         <Route path='/lostfound' element={<ProtectedRuoute><NavBar/><Lostfound/><Footer/></ProtectedRuoute>}/>
+        <Route path='/chat' element={<ProtectedRuoute><NavBar/><Chat/><Footer/></ProtectedRuoute>}/>
         <Route path='/profile' element={<ProtectedRuoute><NavBar/><Profile/><Footer/></ProtectedRuoute>}/>
       </Routes>
       <ToastContainer
