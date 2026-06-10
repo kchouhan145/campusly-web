@@ -15,6 +15,7 @@ export default function Home() {
   const [showEventImage, setShowEventImage] = useState(false);
   const [showAnnouncementModal, setShowAnnouncementModal] = useState(false);
   const [image, setImage] = useState(null);
+  const [loading,setLoading] = useState(true);
 
   const [announcementForm, setAnnouncementForm] = useState({
     title: "",
@@ -30,6 +31,10 @@ export default function Home() {
       } catch (error) {
         console.error("Failed to fetch announcements:", error);
       }
+      
+    finally{
+      setLoading(false);
+    }
     };
 
     fetchAnnouncements();
@@ -95,6 +100,15 @@ export default function Home() {
       toast.error("Failed to create announcement");
     }
   };
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <h2 className="text-2xl font-semibold text-violet-600">
+          Loading Announcements and Events...
+        </h2>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50">

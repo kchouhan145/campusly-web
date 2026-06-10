@@ -10,6 +10,7 @@ export default function Events() {
   const [search, setSearch] = useState("");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [loading,setLoading] = useState(true);
 
   const [eventForm, setEventForm] = useState({
     title: "",
@@ -74,6 +75,9 @@ export default function Events() {
     } catch (error) {
       console.error(error);
       toast.error("Failed to fetch events");
+    }    
+    finally{
+      setLoading(false);
     }
   };
 
@@ -92,6 +96,16 @@ export default function Events() {
       );
     });
   }, [events, search]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <h2 className="text-2xl font-semibold text-violet-600">
+          Loading Events...
+        </h2>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50">

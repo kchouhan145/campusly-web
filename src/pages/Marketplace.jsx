@@ -15,6 +15,7 @@ export default function Marketplace() {
   const [showSellModal, setShowSellModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [productImage, setProductImage] = useState(null);
+  const [loading,setLoading] = useState(true);
 
   const [productForm, setProductForm] = useState({
     title: "",
@@ -117,6 +118,9 @@ export default function Marketplace() {
       console.log(data.products);
     } catch (error) {
       console.log(error);
+    }    
+    finally{
+      setLoading(false);
     }
   };
 
@@ -128,6 +132,15 @@ export default function Marketplace() {
     item.title.toLowerCase().includes(search.toLowerCase())
   );
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <h2 className="text-2xl font-semibold text-violet-600">
+          Loading MarketPlace...
+        </h2>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Hero */}

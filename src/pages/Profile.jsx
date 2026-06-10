@@ -35,7 +35,7 @@ export default function Profile() {
 
       {/* Hero Section */}
 
-      <section className="bg-gradient-to-r from-violet-700 via-indigo-700 to-purple-800 text-white">
+      <section className="bg-linear-to-r from-violet-700 via-indigo-700 to-purple-800 text-white">
         <div className="max-w-6xl mx-auto px-6 py-16">
 
           <div className="flex flex-col md:flex-row items-center gap-8">

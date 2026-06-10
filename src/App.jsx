@@ -15,6 +15,7 @@ import Singup from './pages/Singup';
 import Getapp from './pages/Getapp';
 import Footer from './components/Footer';
 import Chat from './pages/Chat';
+import Announcements from './pages/Announcements';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
         <Route path='download' element={[<NavBar/>,<Getapp/>,<Footer/>]}/>
         <Route path="/" element={<ProtectedRuoute><NavBar/><Home/><Footer/></ProtectedRuoute>} />
         <Route path='/events' element={<ProtectedRuoute><NavBar/><Events/><Footer/></ProtectedRuoute>}/>
+        <Route path='/announcements' element={<ProtectedRuoute><NavBar/><Announcements/><Footer/></ProtectedRuoute>}/>
         <Route path='/market' element={<ProtectedRuoute><NavBar/><Marketplace/><Footer/></ProtectedRuoute>}/>
         <Route path='/lostfound' element={<ProtectedRuoute><NavBar/><Lostfound/><Footer/></ProtectedRuoute>}/>
         <Route path='/chat' element={<ProtectedRuoute><NavBar/><Chat/><Footer/></ProtectedRuoute>}/>
