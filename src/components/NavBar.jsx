@@ -24,9 +24,14 @@ const NavBar = () => {
             <Link to="/lostfound">Lost & Found</Link>
             <Link to="/chat">Chat</Link>
             <Link to="/profile">Profile</Link>
+
+            {user?.role === "admin" && (
+              <Link to="/admin/users">
+                Admin Panel
+              </Link>
+            )}
           </div>
         )}
-
         {/* Desktop Buttons */}
         <div className="hidden md:flex gap-4">
           {!user ? (
@@ -89,8 +94,19 @@ const NavBar = () => {
               <Link to="/profile" onClick={() => setMenuOpen(false)}>
                 Profile
               </Link>
+              {user?.role === "admin" && (
+                <Link
+                  to="/admin/users"
+                  onClick={() => setMenuOpen(false)}
+                  className="text-red-600 font-semibold"
+                >
+                  Admin Panel
+                </Link>
+              )}
             </div>
+
           )}
+
 
           <div className="flex flex-col gap-3">
             {!user && (

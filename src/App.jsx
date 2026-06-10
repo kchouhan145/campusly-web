@@ -16,23 +16,36 @@ import Getapp from './pages/Getapp';
 import Footer from './components/Footer';
 import Chat from './pages/Chat';
 import Announcements from './pages/Announcements';
+import { useAuth } from './context/AuthContext';
+import AdminUsers from './pages/AdminUsers';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
 
+  const { user } = useAuth();
+  const Navigate = useNavigate();
   return (
     <div className="App">
       <Routes>
-        <Route path='/login' element={[<NavBar/>,<Login/>,<Footer/>]}/>
-        <Route path='/register' element={[<NavBar/>,<Singup/>,<Footer/>]}/>
-        <Route path="*" element={[<NavBar/>,<NotFoundPage/>,<Footer/>]} />
-        <Route path='download' element={[<NavBar/>,<Getapp/>,<Footer/>]}/>
-        <Route path="/" element={<ProtectedRuoute><NavBar/><Home/><Footer/></ProtectedRuoute>} />
-        <Route path='/events' element={<ProtectedRuoute><NavBar/><Events/><Footer/></ProtectedRuoute>}/>
-        <Route path='/announcements' element={<ProtectedRuoute><NavBar/><Announcements/><Footer/></ProtectedRuoute>}/>
-        <Route path='/market' element={<ProtectedRuoute><NavBar/><Marketplace/><Footer/></ProtectedRuoute>}/>
-        <Route path='/lostfound' element={<ProtectedRuoute><NavBar/><Lostfound/><Footer/></ProtectedRuoute>}/>
-        <Route path='/chat' element={<ProtectedRuoute><NavBar/><Chat/><Footer/></ProtectedRuoute>}/>
-        <Route path='/profile' element={<ProtectedRuoute><NavBar/><Profile/><Footer/></ProtectedRuoute>}/>
+        <Route path='/login' element={[<NavBar />, <Login />, <Footer />]} />
+        <Route path='/register' element={[<NavBar />, <Singup />, <Footer />]} />
+        <Route path="*" element={[<NavBar />, <NotFoundPage />, <Footer />]} />
+        <Route path='download' element={[<NavBar />, <Getapp />, <Footer />]} />
+        <Route path="/" element={<ProtectedRuoute><NavBar /><Home /><Footer /></ProtectedRuoute>} />
+        <Route path='/events' element={<ProtectedRuoute><NavBar /><Events /><Footer /></ProtectedRuoute>} />
+        <Route path='/announcements' element={<ProtectedRuoute><NavBar /><Announcements /><Footer /></ProtectedRuoute>} />
+        <Route path='/market' element={<ProtectedRuoute><NavBar /><Marketplace /><Footer /></ProtectedRuoute>} />
+        <Route path='/lostfound' element={<ProtectedRuoute><NavBar /><Lostfound /><Footer /></ProtectedRuoute>} />
+        <Route path='/chat' element={<ProtectedRuoute><NavBar /><Chat /><Footer /></ProtectedRuoute>} />
+        <Route path='/profile' element={<ProtectedRuoute><NavBar /><Profile /><Footer /></ProtectedRuoute>} />
+        <Route
+          path="/admin/users"
+          element={
+            user?.role === "admin"
+              ?[<NavBar/>,<AdminUsers/>,<Footer/>]
+              : <Navigate to="/" />
+          }
+        />
       </Routes>
       <ToastContainer
         position="top-right"
