@@ -501,7 +501,7 @@ export default function LostFound() {
                 Contact Owner
               </a> */}
               {String(user?._id || user?.id) ===
-                String(selectedItem?.userId?._id) && (
+                String(selectedItem?.userId?._id) || user.role === 'admin' && (
                   <button
                     onClick={() => handleDeletePost(selectedItem._id)}
                     className="mt-3 w-full bg-red-500 text-white py-2 rounded-xl hover:bg-red-600"

@@ -15,28 +15,28 @@ export default function Home() {
   const [showEventImage, setShowEventImage] = useState(false);
   const [showAnnouncementModal, setShowAnnouncementModal] = useState(false);
   const [image, setImage] = useState(null);
-  const [loading,setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const [announcementForm, setAnnouncementForm] = useState({
     title: "",
     content: "",
   });
 
-  useEffect(() => {
-    const fetchAnnouncements = async () => {
-      try {
-        const { data } = await api.get("/api/announcements");
-        setAnnouncements(data.announcements);
-        // console.log(data.announcements);
-      } catch (error) {
-        console.error("Failed to fetch announcements:", error);
-      }
-      
-    finally{
+  const fetchAnnouncements = async () => {
+    try {
+      const { data } = await api.get("/api/announcements");
+      setAnnouncements(data.announcements);
+      // console.log(data.announcements);
+    } catch (error) {
+      console.error("Failed to fetch announcements:", error);
+    }
+
+    finally {
       setLoading(false);
     }
-    };
+  };
 
+  useEffect(() => {
     fetchAnnouncements();
   }, []);
 
@@ -92,6 +92,7 @@ export default function Home() {
         setImage(null);
 
         fetchAnnouncements();
+        setSelectedAnnouncement(null);
       } else {
         toast.error(data.message || "Failed to create announcement");
       }
@@ -129,7 +130,7 @@ export default function Home() {
             </p>
           </div>
 
-          {(user?.role === "teacher" || user?.role === "admin") && (
+          {(user?.role === "teacher") && (
             <button
               onClick={() => setShowAnnouncementModal(true)}
               className="fixed bottom-6 right-6 bg-violet-600 text-white px-6 py-4 rounded-full shadow-xl hover:bg-violet-700 transition z-50"
