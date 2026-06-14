@@ -11,9 +11,9 @@ const NavBar = () => {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
         {/* Logo */}
-        <h1 className="text-3xl font-bold text-slate-900">
+        <Link to='/' className="text-3xl font-bold text-slate-900">
           Campusly
-        </h1>
+        </Link>
 
         {/* Desktop Navigation */}
         {user && (
