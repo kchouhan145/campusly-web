@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const { getProfile, logout } = useAuth();
@@ -190,23 +191,22 @@ export default function Profile() {
 
           <div className="flex flex-wrap gap-4">
 
-            <button
-              onClick={() =>
-                toast.info("Profile editing coming soon")
-              }
-              className="px-6 py-3 bg-violet-600 text-white rounded-xl font-semibold hover:bg-violet-700 transition"
-            >
-              Edit Profile
-            </button>
+            <Link to='/edit-profile'>
+              <button
+                className="px-6 py-3 bg-violet-600 text-white rounded-xl font-semibold hover:bg-violet-700 transition"
+              >
+                Edit Profile
+              </button>
+            </Link>
 
-            <button
+            {/* <button
               onClick={() =>
                 toast.info("Password change coming soon")
               }
               className="px-6 py-3 border border-violet-600 text-violet-600 rounded-xl font-semibold hover:bg-violet-50 transition"
             >
               Change Password
-            </button>
+            </button> */}
 
             <button
               onClick={logout}

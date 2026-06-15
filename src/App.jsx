@@ -19,6 +19,7 @@ import Announcements from './pages/Announcements';
 import { useAuth } from './context/AuthContext';
 import AdminUsers from './pages/AdminUsers';
 import { useNavigate } from 'react-router-dom';
+import EditProfile from './pages/EditPofile';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
         <Route path='/lostfound' element={<ProtectedRuoute><NavBar /><Lostfound /><Footer /></ProtectedRuoute>} />
         <Route path='/chat' element={<ProtectedRuoute><NavBar /><Chat /><Footer /></ProtectedRuoute>} />
         <Route path='/profile' element={<ProtectedRuoute><NavBar /><Profile /><Footer /></ProtectedRuoute>} />
+        <Route path='/edit-profile' element={<ProtectedRuoute><NavBar /><EditProfile/><Footer /></ProtectedRuoute>} />
         <Route
           path="/admin/users"
           element={
