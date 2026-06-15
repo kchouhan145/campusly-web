@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const NavBar = () => {
@@ -18,17 +18,72 @@ const NavBar = () => {
         {/* Desktop Navigation */}
         {user && (
           <div className="hidden md:flex gap-8 text-slate-700 font-medium">
-            <Link to="/">Home</Link>
-            <Link to="/events">Events</Link>
-            <Link to="/market">Marketplace</Link>
-            <Link to="/lostfound">Lost & Found</Link>
-            <Link to="/chat">Chat</Link>
-            <Link to="/profile">Profile</Link>
+            <div className="hidden md:flex gap-10">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-violet-600 font-semibold border-b-2 border-violet-600 pb-1"
+                    : "text-slate-700 hover:text-violet-600 transition"
+                }
+              >
+                Home
+              </NavLink>
+
+              <NavLink
+                to="/events"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-violet-600 font-semibold border-b-2 border-violet-600 pb-1"
+                    : "text-slate-700 hover:text-violet-600 transition"
+                }
+              >
+                Events
+              </NavLink>
+
+              <NavLink
+                to="/market"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-violet-600 font-semibold border-b-2 border-violet-600 pb-1"
+                    : "text-slate-700 hover:text-violet-600 transition"
+                }
+              >
+                Marketplace
+              </NavLink>
+
+              <NavLink
+                to="/lostfound"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-violet-600 font-semibold border-b-2 border-violet-600 pb-1"
+                    : "text-slate-700 hover:text-violet-600 transition"
+                }
+              >
+                Lost & Found
+              </NavLink>
+
+              <NavLink
+                to="/profile"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-violet-600 font-semibold border-b-2 border-violet-600 pb-1"
+                    : "text-slate-700 hover:text-violet-600 transition"
+                }
+              >
+                Profile
+              </NavLink>
+            </div>
 
             {user?.role === "admin" && (
-              <Link to="/admin/users">
+              <NavLink to="/admin/users"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-violet-600 font-semibold border-b-2 border-violet-600 pb-1"
+                    : "text-slate-700 hover:text-violet-600 transition"
+                }>
                 Admin Panel
-              </Link>
+              </NavLink>
             )}
           </div>
         )}

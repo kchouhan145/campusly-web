@@ -9,6 +9,9 @@ export default function EditProfile() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
+  const [avatar, setAvatar] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState("");
+
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -30,6 +33,8 @@ export default function EditProfile() {
         department: data.user.department || "",
         email: data.user.email || "",
       });
+
+      setAvatarPreview(data.user.avatar || "");
     } catch (error) {
       toast.error("Failed to load profile");
     } finally {
@@ -44,17 +49,45 @@ export default function EditProfile() {
     }));
   };
 
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    setAvatar(file);
+    setAvatarPreview(URL.createObjectURL(file));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       setSaving(true);
 
-      await api.put("/api/users/profile", {
-        name: formData.name,
-        username: formData.username,
-        department: formData.department,
-      });
+      const data = new FormData();
+
+      data.append("name", formData.name);
+      data.append("username", formData.username);
+      data.append("department", formData.department);
+
+      if (avatar) {
+        data.append("avatar", avatar);
+      }
+
+      const response = await api.put(
+        "/api/users/profile",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(response.data.user)
+      );
 
       toast.success("Profile updated successfully");
 
@@ -81,35 +114,58 @@ export default function EditProfile() {
 
   return (
     <div className="min-h-screen bg-slate-50 py-10 px-4">
-
       <div className="max-w-3xl mx-auto">
 
         <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
 
           {/* Header */}
+          <div className="bg-linear-to-r from-violet-700 via-indigo-700 to-purple-800 h-44 relative">
 
-          <div className="bg-gradient-to-r from-violet-700 via-indigo-700 to-purple-800 h-40 relative">
+            <div className="absolute left-1/2 -bottom-16 -translate-x-1/2">
 
-            <div className="absolute left-1/2 -bottom-14 -translate-x-1/2">
+              <label
+                htmlFor="avatar"
+                className="relative cursor-pointer group"
+              >
+                {avatarPreview ? (
+                  <img
+                    src={avatarPreview}
+                    alt="Avatar"
+                    className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl"
+                  />
+                ) : (
+                  <div className="w-32 h-32 rounded-full bg-white shadow-xl flex items-center justify-center text-5xl font-bold text-violet-700 border-4 border-white">
+                    {formData.name?.charAt(0).toUpperCase()}
+                  </div>
+                )}
 
-              <div className="w-28 h-28 rounded-full bg-white shadow-lg flex items-center justify-center text-4xl font-bold text-violet-700 border-4 border-white">
-                {formData.name?.charAt(0).toUpperCase()}
-              </div>
+                <div className="absolute inset-0 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+                  <span className="text-white text-2xl">
+                    📷
+                  </span>
+                </div>
+
+                <input
+                  id="avatar"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleAvatarChange}
+                />
+              </label>
 
             </div>
-
           </div>
 
           {/* Form */}
-
-          <div className="pt-20 px-8 pb-8">
+          <div className="pt-24 px-8 pb-8">
 
             <h1 className="text-3xl font-bold text-center">
               Edit Profile
             </h1>
 
             <p className="text-gray-500 text-center mt-2">
-              Update your Campusly profile information
+              Update your Campusly account information
             </p>
 
             <form
@@ -127,7 +183,7 @@ export default function EditProfile() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-violet-500 outline-none"
+                  className="w-full border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
 
@@ -141,7 +197,7 @@ export default function EditProfile() {
                   name="username"
                   value={formData.username}
                   onChange={handleChange}
-                  className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-violet-500 outline-none"
+                  className="w-full border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
 
@@ -155,7 +211,7 @@ export default function EditProfile() {
                   name="department"
                   value={formData.department}
                   onChange={handleChange}
-                  className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-violet-500 outline-none"
+                  className="w-full border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
 
@@ -177,7 +233,7 @@ export default function EditProfile() {
                 <button
                   type="button"
                   onClick={() => navigate("/profile")}
-                  className="flex-1 border border-gray-300 py-3 rounded-xl hover:bg-gray-50"
+                  className="flex-1 border border-gray-300 py-3 rounded-xl hover:bg-gray-50 transition"
                 >
                   Cancel
                 </button>
@@ -185,11 +241,9 @@ export default function EditProfile() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="flex-1 bg-violet-600 text-white py-3 rounded-xl hover:bg-violet-700 disabled:opacity-50"
+                  className="flex-1 bg-violet-600 text-white py-3 rounded-xl hover:bg-violet-700 disabled:opacity-50 transition"
                 >
-                  {saving
-                    ? "Saving..."
-                    : "Save Changes"}
+                  {saving ? "Saving..." : "Save Changes"}
                 </button>
 
               </div>
@@ -201,7 +255,6 @@ export default function EditProfile() {
         </div>
 
       </div>
-
     </div>
   );
 }

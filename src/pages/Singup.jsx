@@ -31,21 +31,21 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    const emailRegex =
-      /^[a-zA-Z0-9._%+-]+@(gmail\.com|outlook\.com|hotmail\.com|yahoo\.com|kuk\.ac\.in)$/;
-    if (!emailRegex.test(formData.email)) {
-      alert("Please enter a valid email address(we only accept the kuk.ac.in or popular email like yahoo,gamil and hotmail)");
-      return;
-    }
-    const passwordRegex =
-      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    // const emailRegex =
+    //   /^[a-zA-Z0-9._%+-]+@(gmail\.com|outlook\.com|hotmail\.com|yahoo\.com|kuk\.ac\.in)$/;
+    // if (!emailRegex.test(formData.email)) {
+    //   alert("Please enter a valid email address(we only accept the kuk.ac.in or popular email like yahoo,gamil and hotmail)");
+    //   return;
+    // }
+    // const passwordRegex =
+    //   /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    if (!passwordRegex.test(formData.password)) {
-      alert(
-        "Please enter a valid password with alphabetic, numeric, and special characters."
-      );
-      return;
-    }
+    // if (!passwordRegex.test(formData.password)) {
+    //   alert(
+    //     "Please enter a valid password with alphabetic, numeric, and special characters."
+    //   );
+    //   return;
+    // }
     if (formData.password !== formData.confirmPassword) {
       return alert("Passwords do not match");
     }

@@ -41,8 +41,22 @@ export default function Profile() {
 
           <div className="flex flex-col md:flex-row items-center gap-8">
 
-            <div className="w-36 h-36 rounded-full bg-white/20 backdrop-blur-lg border-4 border-white flex items-center justify-center text-5xl font-bold">
-              {user.name?.charAt(0).toUpperCase()}
+            <div className="relative">
+              <div className="w-36 h-36 rounded-full bg-white/20 backdrop-blur-lg border-4 border-white overflow-hidden shadow-2xl">
+                {user?.avatar ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-5xl font-bold text-white">
+                    {user?.name?.charAt(0).toUpperCase()}
+                  </div>
+                )}
+              </div>
+
+              <div className="absolute bottom-3 right-3 w-6 h-6 bg-green-500 border-4 border-white rounded-full"></div>
             </div>
 
             <div>
