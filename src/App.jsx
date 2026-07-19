@@ -1,4 +1,4 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,20 +18,21 @@ import Chat from './pages/Chat';
 import Announcements from './pages/Announcements';
 import { useAuth } from './context/AuthContext';
 import AdminUsers from './pages/AdminUsers';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import EditProfile from './pages/EditPofile';
+import GitLinks from './pages/GitLinks'; 
 
 function App() {
 
   const { user } = useAuth();
-  const Navigate = useNavigate();
   return (
     <div className="App">
       <Routes>
         <Route path='/login' element={[<NavBar />, <Login />, <Footer />]} />
         <Route path='/register' element={[<NavBar />, <Singup />, <Footer />]} />
         <Route path="*" element={[<NavBar />, <NotFoundPage />, <Footer />]} />
-        <Route path='download' element={[<NavBar />, <Getapp />, <Footer />]} />
+        <Route path='/download' element={[<NavBar />, <Getapp />, <Footer />]} />
+        <Route path='/github' element={[<NavBar />, <GitLinks/>, <Footer />]} />
         <Route path="/" element={<ProtectedRuoute><NavBar /><Home /><Footer /></ProtectedRuoute>} />
         <Route path='/events' element={<ProtectedRuoute><NavBar /><Events /><Footer /></ProtectedRuoute>} />
         <Route path='/announcements' element={<ProtectedRuoute><NavBar /><Announcements /><Footer /></ProtectedRuoute>} />
